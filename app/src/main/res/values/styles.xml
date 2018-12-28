@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="microPhoneViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:contentDescription">@string/missing_microphone</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/horizontal_dimension</item>
+        <item name="android:scaleType">fitStart</item>
+    </style>
+
+    <style name="simpleTextViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginTop">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/horizontal_dimension</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">Please Record a voice first</item>
+    </style>
+
+    <style name="btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginTop">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/horizontal_dimension</item>
+    </style>
+
+    <style name="seekBarStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginTop">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/horizontal_dimension</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+    </style>
+
+    <style name="visualStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/horizontal_dimension</item>
+    </style>
+
+</resources>

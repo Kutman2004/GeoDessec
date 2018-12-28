@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "269445782105",
+    "firebase_url": "https://geodessec.firebaseio.com",
+    "project_id": "geodessec",
+    "storage_bucket": "geodessec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269445782105:android:7e6345bbdd1f5283",
+        "android_client_info": {
+          "package_name": "nil.com.geodessec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269445782105-mfgjoupm8igugpcj5ot6lrtpdffiaaqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nil.com.geodessec",
+            "certificate_hash": "370e19cf38b4ca037455f163411fec8ced5a4182"
+          }
+        },
+        {
+          "client_id": "269445782105-psjarqg6rpbqplpvqnvtggfgjprmed9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3KUqKCPJoz5pCV8wpvaJJ2PGFrMZVwIg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269445782105-psjarqg6rpbqplpvqnvtggfgjprmed9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

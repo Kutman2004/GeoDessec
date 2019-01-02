@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "269445782105",
-    "firebase_url": "https://geodessec.firebaseio.com",
-    "project_id": "geodessec",
-    "storage_bucket": "geodessec.appspot.com"
+    "project_number": "122441700457",
+    "firebase_url": "https://audiofirebase-a5be4.firebaseio.com",
+    "project_id": "audiofirebase-a5be4",
+    "storage_bucket": "audiofirebase-a5be4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:269445782105:android:7e6345bbdd1f5283",
+        "mobilesdk_app_id": "1:122441700457:android:7e6345bbdd1f5283",
         "android_client_info": {
           "package_name": "nil.com.geodessec"
         }
       },
       "oauth_client": [
         {
-          "client_id": "269445782105-mfgjoupm8igugpcj5ot6lrtpdffiaaqo.apps.googleusercontent.com",
+          "client_id": "122441700457-lv429s72va2g3op3uinl6fash0a1nhan.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "nil.com.geodessec",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "269445782105-psjarqg6rpbqplpvqnvtggfgjprmed9j.apps.googleusercontent.com",
+          "client_id": "122441700457-pevujlerg96t5i1mmlhohvqqfg14pdv4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC3KUqKCPJoz5pCV8wpvaJJ2PGFrMZVwIg"
+          "current_key": "AIzaSyAcTDSjMsvoTp3c0RXyGz17-jpOzAW8LQo"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "269445782105-psjarqg6rpbqplpvqnvtggfgjprmed9j.apps.googleusercontent.com",
+              "client_id": "122441700457-pevujlerg96t5i1mmlhohvqqfg14pdv4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

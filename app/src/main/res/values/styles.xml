@@ -45,7 +45,6 @@
         <item name="android:layout_marginTop">@dimen/horizontal_dimension</item>
         <item name="android:layout_marginEnd">@dimen/horizontal_dimension</item>
         <item name="android:layout_marginBottom">@dimen/horizontal_dimension</item>
-        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
     </style>
 
     <style name="visualStyle">

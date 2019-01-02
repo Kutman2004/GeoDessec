@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">GeoDessec</string>
-    <string name="end_time_text">END</string>
+    <string name="app_name">FirebaseAudio</string>
+    <string name="end_time_text">End</string>
     <string name="start_time_text">Start</string>
     <string name="play_btn_text">Play</string>
     <string name="pause_btn_text">Pause</string>
     <string name="missing_microphone">Missing Microphone</string>
     <string name="upload_finish">Upload finished</string>
-    <string name="init_text">Initializing...hold the button</string>
+    <string name="init_text">Listening..</string>
     <string name="stopped_text">Stopped</string>
     <string name="finished_text">Finished Playing</string>
 </resources>

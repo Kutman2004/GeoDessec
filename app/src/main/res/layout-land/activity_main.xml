@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ccb6d9ae"
+    tools:context=".MainActivity">
+
+    <com.emrekose.recordbutton.RecordButton
+        android:id="@+id/recordBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="70dp"
+        app:buttonGap="10dp"
+        app:buttonRadius="40dp"
+        app:maxMilisecond="10000"
+        app:progressColor="@color/colorPrimary"
+        app:progressStroke="15"
+        app:recordIcon="@drawable/mic" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/simpleTextViewStyle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="62dp" />
+
+    <ImageView
+        android:id="@+id/button"
+        style="@style/btn_style"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-6dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/play"
+        android:text="@string/play_btn_text" />
+
+    <org.florescu.android.rangeseekbar.RangeSeekBar
+        android:id="@+id/rangeSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="74dp"
+        rsb:absoluteMaxValue="140.54"
+        rsb:absoluteMinValue="15.23" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="348dp"
+        android:layout_marginBottom="379dp"
+        android:text="@string/start_time_text" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="381dp"
+        android:text="@string/end_time_text" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="356dp"
+        android:layout_marginBottom="7dp"
+        android:onClick="pauseAudio"
+        rsb:srcCompat="@drawable/pause" />
+
+
+</RelativeLayout>

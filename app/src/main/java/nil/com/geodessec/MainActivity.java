@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     private static String mFileName = null;
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     private RangeSeekBar rangeSeekBar;
     private Handler mHandler = new Handler();
     private Utilities utils;
-    private int length, stopPosition;
+    private int length;
     private ImageView playButton;
     private boolean isPaused;
     private String audioDownloadFilePath;
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         playButton = findViewById(R.id.button);
         playButton.setImageResource(R.drawable.play);
         m = new MediaPlayer();
-        m.setOnCompletionListener(this);
         audioDownloadFilePath = "";
         rangeSeekBar.setRangeValues(0, m.getDuration());
         rangeSeekBar.setNotifyWhileDragging(true);
@@ -128,10 +126,12 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                     m.start();
                     isPaused = false;
                 }
+
                 try {
                     m.setDataSource(audioDownloadFilePath);
                     m.prepare();
                     m.start();
+
                     updateProgressBar();
                     final int duration = m.getDuration() / 1000;
                     currentDurationLabel.setText("00:00");
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                         mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(MainActivity.this, "got file", Toast.LENGTH_SHORT).show();
+
                             }
                         });
                     } catch (IOException e) {
@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                             m.seekTo(minValue * 1000);
                             currentDurationLabel.setText(getTime((Integer) bar.getSelectedMinValue()));
                             totalDurationLabel.setText(getTime((Integer) bar.getSelectedMaxValue()));
+
                         }
                     });
 
@@ -290,42 +291,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         mHandler.postDelayed(mUpdateTimeTask, 200);
     }
 
-    @Override
-    public void onCompletion(MediaPlayer mediaPlayer) {
-        m.reset();
-        try {
-            m.setDataSource(audioDownloadFilePath);
-            m.prepare();
-            m.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        mHandler.removeCallbacks(mUpdateTimeTask);
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        mHandler.removeCallbacks(mUpdateTimeTask);
-        int totalDuration = m.getDuration();
-        int currentPosition = utils.progressToTimer(seekBar.getProgress(), totalDuration);
-
-        // forward or backward to certain seconds
-        m.seekTo(currentPosition);
-
-        // update timer progress again
-        updateProgressBar();
-    }
-
 
     public void pauseAudio(View view) {
         if (m != null && m.isPlaying()) {
@@ -347,14 +312,9 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     @Override
     protected void onPause() {
         super.onPause();
-        stopPosition = m.getCurrentPosition(); //stopPosition is an int
-        m.pause();
-    }
+        if (m.isPlaying()) {
+            m.pause();
+        }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        m.seekTo(stopPosition);
-        m.start();
     }
 }

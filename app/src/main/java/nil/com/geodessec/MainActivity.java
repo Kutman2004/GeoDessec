@@ -1,7 +1,6 @@
 package nil.com.geodessec;
 
 import android.Manifest;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -21,6 +20,7 @@ import android.widget.Toast;
 import com.emrekose.recordbutton.RecordButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     private RangeSeekBar rangeSeekBar;
     private Handler mHandler = new Handler();
     private Utilities utils;
-    private int length;
+    private int length, stopPosition;
     private ImageView playButton;
     private boolean isPaused;
     private String audioDownloadFilePath;
@@ -122,42 +122,51 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int duration = m.getDuration() / 1000;
-                currentDurationLabel.setText("00:00");
-                totalDurationLabel.setText(getTime(duration));
-                Log.d(TAG, mStorageReference.child("audio").child("new_audio.mp3").getDownloadUrl().toString());
-
-                if (isPaused) {
-                    m.seekTo(length);
-                    m.start();
-                    isPaused = false;
-                }
-
-                rangeSeekBar.setRangeValues(0, duration);
-                rangeSeekBar.setSelectedMinValue(0);
-                rangeSeekBar.setSelectedMaxValue(duration);
-                rangeSeekBar.setEnabled(true);
-                rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
-                    @Override
-                    public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Integer minValue, Integer maxValue) {
-
-                        m.seekTo(minValue * 1000);
-                        currentDurationLabel.setText(getTime((Integer) bar.getSelectedMinValue()));
-                        totalDurationLabel.setText(getTime((Integer) bar.getSelectedMaxValue()));
-                    }
-                });
-                m.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//
+//                m.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                 try {
                     m.setDataSource(audioDownloadFilePath);
                     m.prepare();
                     m.start();
-
+                    updateProgressBar();
+                    final int duration = m.getDuration() / 1000;
+                    currentDurationLabel.setText("00:00");
+                    totalDurationLabel.setText(getTime(duration));
+                    Log.d(TAG + "Totalration", getTime(duration));
                     if (isPaused) {
                         m.seekTo(length);
+                        m.start();
                         isPaused = false;
                     }
-                    updateProgressBar();
+                    final File localFile = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_DOWNLOADS), "New_Audio22.mp3");
+                    try {
+                        localFile.createNewFile();
+                        mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(MainActivity.this, "got file", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    rangeSeekBar.setRangeValues(0, duration);
+                    rangeSeekBar.setSelectedMinValue(0);
+                    rangeSeekBar.setSelectedMaxValue(duration);
+                    rangeSeekBar.setEnabled(true);
+                    rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+                        @Override
+                        public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Integer minValue, Integer maxValue) {
+
+                            m.seekTo(minValue * 1000);
+                            currentDurationLabel.setText(getTime((Integer) bar.getSelectedMinValue()));
+                            totalDurationLabel.setText(getTime((Integer) bar.getSelectedMaxValue()));
+                        }
+                    });
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -257,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                     @Override
                     public void onSuccess(Uri uri) {
                         audioDownloadFilePath = uri.toString();
-                        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+                        //setVolumeControlStream(AudioManager.STREAM_MUSIC);
                     }
                 });
 
@@ -329,5 +338,26 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         }
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (m.isPlaying() && m != null)
+            m.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopPosition = m.getCurrentPosition(); //stopPosition is an int
+        m.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        m.seekTo(stopPosition);
+        m.start();
     }
 }

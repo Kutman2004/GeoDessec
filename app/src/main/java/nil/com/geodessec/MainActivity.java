@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         playButton = findViewById(R.id.button);
         playButton.setImageResource(R.drawable.play);
         m = new MediaPlayer();
-        // Important
         m.setOnCompletionListener(this);
         audioDownloadFilePath = "";
         rangeSeekBar.setRangeValues(0, m.getDuration());
@@ -124,7 +123,11 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
             public void onClick(View view) {
 //
 //                m.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
+                if (isPaused) {
+                    m.seekTo(length);
+                    m.start();
+                    isPaused = false;
+                }
                 try {
                     m.setDataSource(audioDownloadFilePath);
                     m.prepare();
@@ -133,12 +136,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                     final int duration = m.getDuration() / 1000;
                     currentDurationLabel.setText("00:00");
                     totalDurationLabel.setText(getTime(duration));
-                    Log.d(TAG + "Totalration", getTime(duration));
-                    if (isPaused) {
-                        m.seekTo(length);
-                        m.start();
-                        isPaused = false;
-                    }
                     final File localFile = new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_DOWNLOADS), "New_Audio22.mp3");
                     try {
